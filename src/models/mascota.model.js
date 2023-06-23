@@ -10,7 +10,7 @@ const mascotaSchema = new mongoose.Schema({
 		required: true,
 	},
 	edad: {
-		type: int,
+		type: Number,
 		required: true,
 	},
 	especie: {
@@ -26,7 +26,7 @@ const mascotaSchema = new mongoose.Schema({
 		required: false,
 	},
 	fotos: {
-		type: String[3],
+		type: [String],
 		required: true,
 	},
 });

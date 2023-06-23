@@ -1,5 +1,6 @@
-import dotenv from "dotenv";
-dotenv.config();
+
+//import dotenv from "dotenv";
+//dotenv.config();
 
 //para usar uri oculto con archivo .env
 

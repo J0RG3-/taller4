@@ -1,4 +1,4 @@
-import Mascota from "../models/product.model.js";
+import Mascota from "../models/mascota.model.js";
 
 async function getMascotas(req, res) {
 	const mascotas = await Mascota.find();
@@ -47,6 +47,6 @@ export async function borrarMascota(req, res){
 }
 
 export {
-	getMascotas,getMascota,nuevaMascota,borrarMascota
+	getMascotas,getMascota,nuevaMascota
 	
 };
