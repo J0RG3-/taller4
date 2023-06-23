@@ -1,19 +1,13 @@
 import mongoose from "mongoose";
-//import { MONGO_URI } from "./environment.js";
+import { MONGO_URI } from "./environment.js";
 
-const MONGO_URI = 'mongodb://localhost:27017/adopcion';
-export default function connectDB() {
-	return mongoose
-		.connect(MONGO_URI)
-		.then(async () => {
-			console.log("conexión exitosa");
-			await registerModels();
-			return true;
-		})
-		.catch((error) => {
-			console.log(`Error: ${error}`);
-			return false;
-		});
+export default async function connectDB() {
+	try{
+		await mongoose.connect(MONGO_URI);
+		console.log("conexion a la bd exitosa")
+	}catch(e){
+		console.log("conexion a la bd fallida")
+	}
 }
 
 async function registerModels() {

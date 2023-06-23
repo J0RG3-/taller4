@@ -2,51 +2,53 @@ import Mascota from "../models/mascota.model.js";
 
 async function getMascotas(req, res) {
 	const mascotas = await Mascota.find();
-	return res.status(200).send({ Mascota });
+	return res.status(200).json({ mascotas });
 }
 
 async function getMascota(req, res) {
 	const idMascota = req.params.id;
 
 	const mascota = await Mascota.findById(idMascota);
-	return res.status(200).send({ product });
+	return res.status(200).json({ mascota });
 }
 
 async function nuevaMascota(req, res) {
 	try {
+		const {nombre, descripcion, edad, especie, sexo, nroChip, fotos}=req.body;
+
 		const nuevaMascota = await Mascota.create({
-			nombre: req.body.nombre,
-			descripcion: req.body.descripcion,
-			edad: req.body.edad,
-			especie: req.body.especie,
-			sexo: req.body.sexo,
-			nroChip: req.body.nroChip,
-			fotos: req.body.fotos,
+			nombre: nombre,
+			descripcion: descripcion,
+			edad: edad,
+			especie: especie,
+			sexo: sexo,
+			nroChip: nroChip,
+			fotos: fotos,
 
 
 		});
-		return res.status(201).send({ response: nuevaMascota });
+
+		return res.status(201).json({ response: nuevaMascota });
 	} catch (error) {
-		return res.status(500).send({ error });
+		return res.status(500).json({ error });
 	}
 }
 
 
-export async function borrarMascota(req, res){
-	const idMascota = req.params.id;
+async function borrarMascota(req, res){
+	const {id} = req.params;
+	console.log(id)
 
-	const mascota = await Mascota.findById(idMascota);
+	const mascota = await Mascota.findByIdAndRemove(id);
 
 	if (!mascota){
-		return res.status(404).send({error: "No encontrado"})
+		return res.status(404).json({error: "no eliminaste na xd"})
 	}
 
-	await mascota.delete();
-
-	return res.status(204).send();
+	return res.status(200).json({success:true});
 }
 
 export {
-	getMascotas,getMascota,nuevaMascota
+	getMascotas,getMascota,nuevaMascota,borrarMascota
 	
 };
