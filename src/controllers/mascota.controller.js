@@ -27,10 +27,6 @@ async function nuevaMascota(req, res) {
       nroChip: nroChip,
       fotos: fotos,
     });
-
-	if (!idMascota) {
-		return res.status(404).json({ error: "no eliminaste na xd" });
-	  }
     return res.status(201).json({ response: nuevaMascota });
   } catch (error) {
     return res.status(500).json({ error });
@@ -40,14 +36,15 @@ async function nuevaMascota(req, res) {
 async function borrarMascota(req, res) {
   try {
     const { id } = req.params;
-    console.log(id);
-    const mascota = await Mascota.findByIdAndRemove(id);
-
-    if (!mascota) {
+    const filter = { _id: new ObjectId(id) };
+    const result = await Mascota.findOne(filter);
+    
+    if (result == null) {
       return res.status(404).json({ error: "no existe la mascota solicitada" });
+    }else{
+      const mascota = await Mascota.findByIdAndRemove(id);
+      return res.status(200).json({ success: "Mascota eliminada correctamente" });
     }
-
-    return res.status(200).json({ success: true });
   } catch (error) {
     return res.status(500).json({ error });
   }

@@ -3,8 +3,8 @@ import { getUsuario, getUsuarios, nuevoUsuario } from "../controllers/usuario.co
 
 const router = express.Router();
 
-router.get("/usuarios", getUsuarios);
-router.get("usuarios/:idUsuario", getUsuario);
-router.post("/nuevousuario", nuevoUsuario);
+router.get("/", getUsuarios);
+router.get("/:idUsuario", getUsuario);
+router.post("/", nuevoUsuario);
 
 export default router;

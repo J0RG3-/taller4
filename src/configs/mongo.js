@@ -10,8 +10,3 @@ export default async function connectDB() {
 		console.log(e)
 	}
 }
-
-async function registerModels() {
-	await import("../models/mascota.model.js");
-	await import("../models/usuario.model.js");
-}
