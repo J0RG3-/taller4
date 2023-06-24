@@ -57,7 +57,6 @@ async function borrarMascota(req, res) {
 async function editarMascota(req, res) {
 	try {
 		const { id } = req.params;
-		console.log("id mascota: "+id);
 	  	const {nombre, descripcion, edad, especie, sexo, nroChip, fotos } = req.body;
   
 	  const filter = { _id: new ObjectId(id) };
@@ -74,13 +73,16 @@ async function editarMascota(req, res) {
 		},
 	  };
   
-		await Mascota.updateOne(filter, update);
+	  const result = await Mascota.findOne(filter);
+	  if (result == null) {
+		return res.status(404).json({ error: "no existe la mascota solicitada" });
+	  }else{
+	  	await Mascota.updateOne(filter, update);
 	  	return res.status(201).json({ response: "Mascota editada correctamente"});
-		
+	  }
 	} catch (error) {
-	  console.error("Error :", error);
-	  return res.status(404).json({ error: "no existe la mascota solicitada" });
-
+	  console.error("Error:", error);
+	  return res.status(500).json({ error });
 	}
   }
   
