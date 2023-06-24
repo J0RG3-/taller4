@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+
 const mascotaSchema = new mongoose.Schema({
 	nombre: {
 		type: String,
