@@ -3,19 +3,17 @@ import bcrypt from "bcrypt"
 
 export async function registrar(req, res) {
 	try {
-		const { nombre, apPaterno, apMaterno, email, password} = req.body;
+		const { nombre, email, password} = req.body;
 
 		const nuevoUsuario = await Usuario.create({
 			nombre: nombre,
-			apPaterno: apPaterno,
-			apMaterno: apMaterno,
 			email: email,
 			password: await passwordEncrypt(password),
 		});
 		return res.status(201).json({ response: nuevoUsuario });
 
 	} catch (error) {
-		return res.status(500).json({ error });
+		return res.status(500).json({ error:"Hubo un error. Inténtalo de nuevo" });
 	}
 }
 
@@ -32,9 +30,9 @@ export async function login(req, res){
         }
 
         if(await comparePassword(password,usuario.password)) return res.status(200).json("logeado!");
-        else return res.status(200).json("credenciales incorrectas!"); 
+        else return res.status(400).json("Error en las credenciales de acceso"); 
     }catch(error){
-        return res.status(500).json("error")
+        return res.status(500).json("Hubo un error. Inténtalo de nuevo")
     }
 }
 

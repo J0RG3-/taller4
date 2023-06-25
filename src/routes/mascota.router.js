@@ -1,18 +1,19 @@
 import express from "express";
 import {
+	getListadoMascotas,
+	getMascotaPorId,
 	nuevaMascota,
-	getMascota,
-	borrarMascota,
-	getMascotas,
 	editarMascota,
+	borrarMascota,
 } from "../controllers/mascota.controller.js";
 
 const router = express.Router();
 
-router.get("/", getMascotas);
-router.get("/:id", getMascota);
-router.post("/", nuevaMascota);
-router.delete("/:id", borrarMascota);
-router.put("/:id", editarMascota);
+
+router.get("/:id", getMascotaPorId);
+router.post("/agregar", nuevaMascota);
+router.delete("/eliminar/:id", borrarMascota);
+router.put("/editar/:id", editarMascota);
+router.get("/", getListadoMascotas);
 
 export default router;
