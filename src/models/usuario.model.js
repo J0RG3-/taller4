@@ -5,6 +5,14 @@ const usuarioSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	apPaterno: {
+		type: String,
+		required: true,
+	},
+    apMaterno: {
+		type: String,
+		required: true,
+	},
     email: {
 		type: String,
 		required: true,
@@ -13,9 +21,6 @@ const usuarioSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
-	},
-	mascotas: {
-		type: [String],
 	},
 });
 
